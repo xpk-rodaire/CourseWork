@@ -1,0 +1,81 @@
+﻿<html>
+<head>
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        body {
+            font-family: Verdana;
+        }
+
+        h1, h2, h3 {
+            color: darkblue;
+        }
+
+        .rating-circle {
+            height: 2em;
+            width: 2em;
+            border: .1em solid black;
+            border-radius: 1.1em;
+            display: inline-block;
+            margin: 0;
+            padding: .1em;
+        }
+
+        .rating-hover {
+            background-color: yellow;
+        }
+
+        .rating-chosen {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contoso Web Developer Conference</h1>
+    <h2>Finding elements using jQuery</h2>
+    <div>This session is about identifying elements using jQuery methods and selectors.</div>
+    <h3>Rate this session</h3>
+    <div id="rating-container">
+        <div class="rating-circle"></div>
+        <div class="rating-circle"></div>
+        <div class="rating-circle"></div>
+        <div class="rating-circle"></div>
+        <div class="rating-circle"></div>
+    </div>
+
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+
+    <script>
+        // When the user hovers their mouse over a circle, that circle and all circles to the
+        // left must be filled with a color, such as yellow.
+
+        // When the user clicks on a circle, that circle and all circles to the left must be 
+        // filled with a different color, such as green. The color must remain, even after 
+        // the user moves their mouse away from the widget. You do not need to remember the 
+        // number for page refreshes.
+
+        $('.rating-circle').hover(function () {
+            var hoverIndex = $('#rating-container').children().index($(this));
+            $('#rating-container').children()
+                .filter(function (index, element) { return index <= hoverIndex; })
+                .addClass("rating-hover");
+        });
+
+        $('.rating-circle').click(function () {
+            // Remove rating-chosen from all circles
+            $('#rating-container').children().removeClass("rating-chosen");
+
+            // Add rating-chosen to clicked curle and those to its left
+            var clickIndex = $('#rating-container').children().index($(this));
+            $('#rating-container').children()
+                .filter(function (index, element) { return index <= clickIndex; })
+                .addClass("rating-chosen");
+        });
+
+        $('.rating-circle').mouseout(function () {
+            $('#rating-container').children().removeClass("rating-hover");
+        });
+
+    </script>
+</body>
+</html>
