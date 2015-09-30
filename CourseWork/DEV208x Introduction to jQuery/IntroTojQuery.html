@@ -1,0 +1,101 @@
+﻿<html>
+<head>
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        body {
+            font-family: Verdana;
+        }
+
+        h1, h2, h3 {
+            color: darkblue;
+        }
+
+        .rating-circle {
+            height: 2em;
+            width: 2em;
+            border: .1em solid black;
+            border-radius: 1.1em;
+            display: inline-block;
+            margin: 0;
+            padding: .1em;
+        }
+
+        .rating-hover {
+            background-color: yellow;
+        }
+
+        .rating-chosen {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contoso Web Developer Conference</h1>
+    <h2>Finding elements using jQuery</h2>
+    <div>This session is about identifying elements using jQuery methods and selectors.</div>
+    <h3>Rate this session</h3>
+    <div id="rating-container" max-value="5">
+
+    </div>
+
+    <div>
+        <label for="max-value">Enter max value:</label>
+        <input type="text" id="max-value" />
+        <button type="button" id="update-max-value">Update max value</button>
+    </div>
+
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+
+    <script>
+        $(function () {
+            // Load the initial number of circles
+            updateCircles($('#rating-container').attr('max-value'));
+        });
+
+        $(document).on('click', '.rating-circle', function () {
+            // Remove rating-chosen from all circles
+            $('#rating-container').children().removeClass("rating-chosen");
+
+            // Add rating-chosen to clicked circle and those to its left
+            var clickIndex = $('#rating-container').children().index($(this));
+            $('#rating-container').children()
+                .filter(function (index, element) { return index <= clickIndex; })
+                .addClass("rating-chosen");
+        });
+
+        $(document).on('mouseleave', '.rating-circle', function () {
+            $('#rating-container').children().removeClass("rating-hover");
+        });
+
+        $(document).on('mouseenter', '.rating-circle', function () {
+            var hoverIndex = $('#rating-container').children().index($(this));
+            $('#rating-container').children()
+                .filter(function (index, element) { return index <= hoverIndex; })
+                .addClass("rating-hover");
+        });
+
+        $('#update-max-value').click(function () {
+            var numberCircles = $('#max-value').val();
+
+            // Check that user entered a valid integer value
+            if ($.isNumeric(numberCircles)) {
+                updateCircles(numberCircles);
+            } else {
+                alert('Please enter a valid integer.');
+            }
+        });
+
+        function updateCircles(numberCircles) {
+            // Remove all existing circles
+            $('#rating-container').empty();
+
+            // Add circles
+            for (var i = 0; i < numberCircles; i++) {
+                $('#rating-container').append('<div class="rating-circle"></div>');
+            }
+        }
+
+    </script>
+</body>
+</html>
