@@ -46,11 +46,21 @@
         <button id="button2">Button Two</button>
     </div>
 
+    <div id="rating-container" max-value="5">
+        <div class="rating-circle rating-chosen"></div>
+        <div class="rating-circle rating-chosen"></div>
+        <div class="rating-circle rating-chosen"></div>
+        <div class="rating-circle"></div>
+    </div>
+
     <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 
     <script>
 
         $(function () {
+
+            alert($('#rating-container').children('.rating-chosen').length);
+
             $('#first').click(function () {
                 //$('#target').after('<section>New element</section>');
                 //$('#parent').children().wrapAll('<section></section>');

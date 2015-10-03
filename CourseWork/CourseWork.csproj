@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DEV208x Introduction to jQuery\FinalExam.html" />
+    <Content Include="DEV208x Introduction to jQuery\IntroTojQuery1.html" />
+    <Content Include="DEV208x Introduction to jQuery\IntroTojQuery3.html" />
     <Content Include="DEV208x Introduction to jQuery\Module 2 - Managing Content, Events and Effects.docx" />
     <Content Include="DEV208x Introduction to jQuery\Module 1 - Adding jQuery to Web Pages.docx" />
     <Content Include="DEV208x Introduction to jQuery\Module 3 - Asynchronous Programming and AJAX.docx" />
@@ -68,7 +71,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DEV208x Introduction to jQuery\IntroTojQuery.html" />
+    <Content Include="DEV208x Introduction to jQuery\IntroTojQuery2.html" />
     <Content Include="DEV208x Introduction to jQuery\IntroTojQueryScratch.html" />
     <Content Include="Web.config" />
   </ItemGroup>

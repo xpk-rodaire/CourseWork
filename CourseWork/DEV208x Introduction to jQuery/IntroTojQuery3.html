@@ -1,6 +1,5 @@
 ﻿<html>
 <head>
-    <title>Hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
         body {
@@ -30,14 +29,12 @@
         }
     </style>
 </head>
-<body>
+<body> 
     <h1>Contoso Web Developer Conference</h1>
     <h2>Finding elements using jQuery</h2>
     <div>This session is about identifying elements using jQuery methods and selectors.</div>
     <h3>Rate this session</h3>
-    <div id="rating-container" max-value="5">
-
-    </div>
+    <div id="rating-container" max-value="5"></div>
 
     <div>
         <label for="max-value">Enter max value:</label>
@@ -45,9 +42,21 @@
         <button type="button" id="update-max-value">Update max value</button>
     </div>
 
+    <button type="button" id="save-rating">Save rating</button>
+    <div id="output"></div>
+
     <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 
     <script>
+        $('#save-rating').click(function () {
+            var x = $('#rating-container.rating-chosen');
+            $.post('http://jquery-edx.azurewebsites.net/api/Rating',
+                { value: $("#rating-container").children('.rating-chosen').length, maxValue: $('#rating-container').attr('max-value') },
+                function (data) {
+                    $('#output').text(data.message);
+                });
+        });
+
         $(function () {
             // Load the initial number of circles
             updateCircles($('#rating-container').attr('max-value'));
@@ -94,8 +103,10 @@
             for (var i = 0; i < numberCircles; i++) {
                 $('#rating-container').append('<div class="rating-circle"></div>');
             }
-        }
 
+            // Update max-value atrribute
+            $('#rating-container').attr('max-value', numberCircles);
+        }
     </script>
 </body>
 </html>
